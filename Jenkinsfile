@@ -5,9 +5,17 @@ pipeline {
         maven 'Maven 3'
     }
     stages {
-        stage('Checkout') {
+        /*stage('Checkout') {
             steps {
                 git branch: 'main', url: 'git@github.com:kumarsushmitha33/account-service.git'
+            }
+        }*/
+        stage('Checkout') {
+            steps {
+                echo '📥 Checking out from GitHub using PAT...'
+                git branch: 'main',
+                    credentialsId: 'github-creds',
+                    url: 'https://github.com/kumarsushmitha33/account-service.git'
             }
         }
         stage('Build') {
